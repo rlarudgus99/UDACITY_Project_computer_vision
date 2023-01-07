@@ -9,3 +9,12 @@ Today, Perception plays a very important role in the autonomous driving industry
 Therefore, we need to design a detection model with high accuracy and fast Inference performance.<br/>
 In the real Urban Environment, there are a lot of vehicles and pedestrians.<br/>
 In this situation, we proceeded with this project to design a safe and efficient perception model using Deep Learning.<br/><br/>
+
+## 2. Set up
+<br/>
+### Training
+python experiments/model_main_tf2.py --model_dir=experiments/reference/ --pipeline_config_path=experiments/reference/pipeline_new.config
+### Evaluation
+### Monitoring process
+### Export the Training
+### Inference
