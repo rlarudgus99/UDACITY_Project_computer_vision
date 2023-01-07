@@ -13,12 +13,4 @@ In this situation, we proceeded with this project to design a safe and efficient
 ## 2. Set up
 <br/>
 ### Training
-<br/>
-'''
-    python experiments/model_main_tf2.py --model_dir=experiments/reference/ --pipeline_config_path=experiments/reference/pipeline_new.config
-'''
-<br/>
-### Evaluation
-### Monitoring process
-### Export the Training
-### Inference
+
