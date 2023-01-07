@@ -15,7 +15,7 @@ In this situation, we proceeded with this project to design a safe and efficient
 ### Training
 <br/>
 '''
-python experiments/model_main_tf2.py --model_dir=experiments/reference/ --pipeline_config_path=experiments/reference/pipeline_new.config
+    python experiments/model_main_tf2.py --model_dir=experiments/reference/ --pipeline_config_path=experiments/reference/pipeline_new.config
 '''
 <br/>
 ### Evaluation
