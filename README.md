@@ -1,5 +1,5 @@
 # Project: Object Detection in an Urban Environment
-<br/><br/>
+
 ## 1. Project overview
 - Description of the Project
 Detection is an algorithm that combines Classification and Localization of objects in an image.<br/>
@@ -70,6 +70,7 @@ We can do this using Cross-validation, and in the case of this project, the prov
 ![캡처](https://user-images.githubusercontent.com/98406354/211243711-5d993acd-c0ff-4a39-bc1b-4f328785e42c.PNG)
 
 ![asdf](https://user-images.githubusercontent.com/98406354/211243669-d86f9040-6768-48b9-a2c2-b5640aefef2e.gif)
+
 I don't know the reason, but as a result of the reference experience, it was confirmed that the object in the image was not well detected as shown in the gif file below.
 
 
