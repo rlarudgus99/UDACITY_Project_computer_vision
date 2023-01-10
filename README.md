@@ -29,7 +29,7 @@ python experiments/exporter_main_v2.py --input_type image_tensor --pipeline_conf
 ```
 6. Inference
 ```{.bash}
-python inference_video.py --labelmap_path label_map.pbtxt --model_path experiments/reference/exported/saved_model --tf_record_path data/test/segment-12200383401366682847_2552_140_2572_140_with_camera_labels.tfrecord --config_path experiments/reference/pipeline_new.config --output_path animation.gif
+python inference_video.py --labelmap_path label_map.pbtxt --model_path experiments/reference/exported/saved_model --tf_record_path /app/project/data/dst/test/processed/segment-1022527355599519580_4866_960_4886_960_with_camera_labels.tfrecord --config_path experiments/reference/pipeline_new.config --output_path animation.gif
 ```
 
 ## 3. Dataset
@@ -53,11 +53,33 @@ It is a case with a low RGB Pixel value at a late night.
 
 Through some modifications in 'Explanatory Data Analysis.ipynb', the Ground Truth bounding box of Objects in the image was plotted.
 
+![count](https://user-images.githubusercontent.com/98406354/211465820-4dc5af02-d616-4bfc-9bf6-7bf5cc8e6487.png)
+![area](https://user-images.githubusercontent.com/98406354/211465813-5667abc2-5056-4f18-9105-d7b7d9f1ab50.png)
+
+The two images attached at the top are graphs expressing 'Class Distribution' and 'the sum of the area of the bounding box by class' forming a specific image.<br/>
+It was created because it was considered necessary to improve understanding of the characteristics of Training Dataset, and in a similar way, the distribution such as 'weather' (Sunny, cloudy), which is data included in TFRecord, can be compared.
+
+
+
 ### The Needs of Data Augmentation
 
 What can be seen from the above cases is that the image that the actual vehicle can acquire may not be provided with clear image quality such as first image.<br/>
 In fact, in the case of TFRecord provided by this project, it was confirmed that about 15 out of 100 data sets include Occlusion and Darkness.<br/>
 Therefore, in order to design a robust model for the above image distortion before actual training, data augmentation should be carried out to increase the number of images corresponding to the above case.<br/>
+
+![hue1](https://user-images.githubusercontent.com/98406354/211456262-0d889da7-fd44-479a-8523-35d451fbefd5.png)
+![hue2](https://user-images.githubusercontent.com/98406354/211456272-dce921f9-8b3a-47c3-80c9-6ea93687ae23.png)
+
+### Data Augmentation : 'random_adjust_hue'<br/>
+As can be seen from the images above, it can be seen that an image to which hue is applied is output, which is different from the color of the actual scene. <br/>
+In fact, it seems that the Data Augmentation method used in this project contributed to improving model performance.
+![black_patch1](https://user-images.githubusercontent.com/98406354/211456299-dfc61d6a-09f3-41ff-a760-92fe2a237d10.png)
+![black_patch2](https://user-images.githubusercontent.com/98406354/211456305-f38f123b-316d-4931-b97a-e18057163777.png)
+
+### Data Augmentation : 'random_black_patches' <br/>
+Although not used for actual training, these images are printed to improve understanding of data augmentation.<br/>
+Randomly(number, location) plot Black patches in the image.<br/>
+It could be verified that an image corresponding to the occlusion was included in the train dataset, so the method was applied, but it was not actually applied because it seemed to have an adverse effect on the model performance.
 
 ### Cross-Validation
 It is necessary to check whether the weight of the model obtained through training can produce effective performance even if a completely different image is input during the actual reference.<br/>
@@ -77,11 +99,14 @@ I don't know the reason, but as a result of the reference experience, it was con
 
 ### Improve on the Reference
 
-![Untitled (2)](https://user-images.githubusercontent.com/98406354/211185612-166ae41c-5b7e-4d43-a2dd-87805996b05d.png)
+![캡처](https://user-images.githubusercontent.com/98406354/211456177-196f3849-7c71-4cd0-bfa2-c5c6adf92b28.PNG)
 
 ![animation1](https://user-images.githubusercontent.com/98406354/211185615-117d3260-3b20-4412-83af-cceff6e7534b.gif)
 
-As described above, since only about 15% of the images in Train dataset contain Occlusion and Darkness, it was determined that the corresponding cases could not be learned in the model only with Original Dataset, so I added the 'random_adjusted_hue' and then proceeded learning process.
+As described above, since only about 15% of the images in Train dataset contain Occlusion and Darkness, it was determined that the corresponding cases could not be learned in the model only with Original Dataset, so I added the 'random_adjusted_hue' and then proceeded learning process.<br/>
+The Graph image attached to the top shows the change of loss according to the learning step during model training.<br/>
+A lighter color line represents the result of Evaluation, and in this case, although I don't know why the graph appears in a straight line, it draws a trend line similar to the training result, and the Inference results show a significant change compared to the Reference experience, which led to the judgment that the model is not overfeat to Training dataset.
+
 
 ## Discussion
 When first learning was attempted, many changes were made, such as adding a large amount of data augmentation methods and increasing learning steps. However, such a method has made the performance of models worse.<br/>
