@@ -53,10 +53,10 @@ It is a case with a low RGB Pixel value at a late night.
 
 Through some modifications in 'Explanatory Data Analysis.ipynb', the Ground Truth bounding box of Objects in the image was plotted.
 
-![count](https://user-images.githubusercontent.com/98406354/211465820-4dc5af02-d616-4bfc-9bf6-7bf5cc8e6487.png)
+![output](https://user-images.githubusercontent.com/98406354/211541315-21c97252-8a16-4dbe-ac72-68c591b921b5.png)
 ![area](https://user-images.githubusercontent.com/98406354/211465813-5667abc2-5056-4f18-9105-d7b7d9f1ab50.png)
 
-The two images attached at the top are graphs expressing 'Class Distribution' and 'the sum of the area of the bounding box by class' forming a specific image.<br/>
+The two images attached at the top are graphs expressing 'Class Distribution' forming a all images of dataset and 'the sum of the area of the bounding box by class' forming a specific image.<br/>
 It was created because it was considered necessary to improve understanding of the characteristics of Training Dataset, and in a similar way, the distribution such as 'weather' (Sunny, cloudy), which is data included in TFRecord, can be compared.
 
 
